@@ -18,8 +18,8 @@ namespace GeradorSenhas.Services
 
         public string GenerateJwtToken(Usuario user)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtConfig:Key"]));
-            var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
+            //var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtConfig:Key"]));
+            //var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[]
             {
@@ -32,8 +32,10 @@ namespace GeradorSenhas.Services
                 issuer: _configuration["JwtConfig:Issuer"],
                 audience: _configuration["JwtConfig:Audience"],
                 claims: claims,
-                expires: DateTime.Now.AddHours(3),
-                signingCredentials: credentials);
+                expires: DateTime.Now.AddHours(3)
+                //,
+                //signingCredentials: credentials
+                );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
